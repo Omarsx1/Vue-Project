@@ -1,8 +1,16 @@
 <script setup>
 import {Form, Field, ErrorMessage} from 'vee-validate';
 import {schema} from '../schemas/validationSchema';
+import {useRegistrarStore} from '../stores/registrarStore'; 
+import {ref} from 'vue';
+
+const registrarStore = useRegistrarStore()
+
+const nombre = ref('');
+const email = ref('');
 
 const onSubmit = () => {
+    registrarStore.guardarRegistro(nombre.value, email.value);
     console.log('Formulario enviado');
 }
 </script>
@@ -14,14 +22,14 @@ const onSubmit = () => {
       <div class="form">
         <label
           >Nombre:
-          <Field type="text" name="nombre" placeholder="Ingrese su nombre" />
+          <Field v-model="nombre" type="text" name="nombre" placeholder="Ingrese su nombre" />
           <ErrorMessage name="nombre" />
         </label>
       </div>
       <div class="form">
         <label>
           Correo:
-          <Field type="email" name="email" placeholder="Ingrese su email" />
+          <Field v-model="email" type="email" name="email" placeholder="Ingrese su email" />
             <ErrorMessage name="email" />
         </label>
       </div>
