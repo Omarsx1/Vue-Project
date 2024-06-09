@@ -1,12 +1,19 @@
 <script setup>
-    import sidebar from "../components/Sidebar.vue";
+import Sidebar from "../components/Sidebar.vue";
+import Header from "../components/Header.vue";
+import { ref } from "vue";
+
+const texto = ref("");
 </script>
 
 <template>
+  <Header :mensaje="texto" />
   <div class="container">
-    <sidebar/>
+    <Sidebar />
     <div class="content">
-        <router-view/>
+      <input type="text" v-model="texto" />
+      {{ texto }}
+      <router-view />
     </div>
   </div>
 </template>
@@ -15,7 +22,6 @@
 .container {
   display: flex;
 }
-
 .content {
   flex: 1;
   padding: 20px;
